@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@theme {
+  --color-darkBg: #07090e;
+  --color-neonAmber: #ffb000;
+  --color-neonCyan: #00e5ff;
+  --color-neonGreen: #39ff14;
+  --color-neonRed: #ff3b30;
+  --color-hudMuted: rgba(0, 229, 255, 0.15);
+  --color-hudBorder: rgba(0, 229, 255, 0.3);
+  --font-mono: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
+}
+
+body {
+  background-color: #07090e;
+  color: #a5f3fc; /* Cyan-200 */
+  font-family: 'Share Tech Mono', 'JetBrains Mono', 'Courier New', monospace;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(7, 9, 14, 0.8);
+}
+::-webkit-scrollbar-thumb {
+  background: #00e5ff;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #ffb000;
+}
+
+/* Glowing Neon Utilities */
+.neon-glow-cyan {
+  text-shadow: 0 0 5px rgba(0, 229, 255, 0.6), 0 0 15px rgba(0, 229, 255, 0.3);
+}
+
+.neon-glow-amber {
+  text-shadow: 0 0 5px rgba(255, 176, 0, 0.6), 0 0 15px rgba(255, 176, 0, 0.3);
+}
+
+.neon-glow-green {
+  text-shadow: 0 0 5px rgba(57, 255, 20, 0.6), 0 0 15px rgba(57, 255, 20, 0.3);
+}
+
+.neon-border-cyan {
+  box-shadow: 0 0 8px rgba(0, 229, 255, 0.3), inset 0 0 8px rgba(0, 229, 255, 0.1);
+  border: 1px solid rgba(0, 229, 255, 0.5);
+}
+
+.neon-border-amber {
+  box-shadow: 0 0 8px rgba(255, 176, 0, 0.3), inset 0 0 8px rgba(255, 176, 0, 0.1);
+  border: 1px solid rgba(255, 176, 0, 0.5);
+}
+
+/* HUD Glassmorphism Panel */
+.hud-panel {
+  background: rgba(7, 9, 14, 0.85);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 4px;
+}
+
+/* CRT Scanline Overlay */
+.crt::after {
+  content: " ";
+  display: block;
+  position: fixed;
+  top: 0; left: 0; bottom: 0; right: 0;
+  background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%);
+  background-size: 100% 3px;
+  z-index: 9999;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* Terminal Scan Grid Overlay */
+.hud-grid {
+  background-image: 
+    linear-gradient(rgba(0, 229, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px);
+  background-size: 25px 25px;
+}
+
+/* Terminal Flicker animation */
+@keyframes flicker {
+  0% { opacity: 0.98; }
+  50% { opacity: 1.0; }
+  100% { opacity: 0.99; }
+}
+
+.crt-flicker {
+  animation: flicker 0.15s infinite;
+}
+
+/* Radar Sweep effect */
+@keyframes sweep {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+.hud-sweep {
+  position: absolute;
+  top: 0; left: 0; right: 0; height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent,
+    rgba(0, 229, 255, 0.08) 50%,
+    rgba(0, 229, 255, 0.15) 99%,
+    transparent 100%
+  );
+  animation: sweep 8s linear infinite;
+  pointer-events: none;
+}
